@@ -1,0 +1,3466 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+@media screen and (max-width:1920px) {
+
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+    overflow-y: auto;
+    /*原設定body的height: 100%會使得navigation的position: sticky失效，加上overflow-y: auto可解決此問題*/
+  }
+
+  .navigation {
+    height: 54px;
+    background: #FFFFFF;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-container {
+    width: 1200px;
+    height: 54px;
+    position: absolute;
+
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-text {
+    width: 150px;
+    height: 34px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #448899;
+  }
+
+  .frame2 {
+    right: 8px;
+    position: absolute;
+    top: 0px
+  }
+
+  .frame1 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+  }
+
+  .nav-button1 {
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0 0 0;
+    cursor: pointer;
+  }
+
+  .nav-button2 {
+    width: 111px;
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px 5px 0 10px;
+    cursor: pointer;
+    background-color: white;
+  }
+
+  .member-container {
+    display: none;
+    width: 121px;
+    background-color: white;
+    box-shadow: 1px 1px #E8E8E8, -1px 1px #E8E8E8, 1px -1px white, -1px -1px white;
+  }
+
+  #booking-quiry,
+  #member-account,
+  #logout {
+    padding: 20px 0 0 10px;
+  }
+
+  #payment-status {
+    color: red;
+  }
+
+  .profile-label {
+    width: 280px;
+    height: 22px;
+    margin: 10px 0;
+    padding: 0 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #666666;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+
+  #profile-box {
+    width: 340px;
+    margin: 40px 0 0 0;
+    height: 545px;
+    border-radius: 6px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 60px 0px #AAAAAA;
+    display: inline-block;
+  }
+
+  .avatar-container {
+    width: 310px;
+    height: 177px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .edit-avatar,
+  .upload-file {
+    width: 70px;
+    height: 25px;
+    position: absolute;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .avatar-select {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+
+  .avatar {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+  }
+
+  .nav-button1-text {
+    width: 64px;
+    height: 14px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .nav-button2-text {
+    width: 71px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .nav-button1-text:hover,
+  .nav-button2-text:hover,
+  .itemText:hover {
+    color: #448899;
+  }
+
+  .content {
+    display: none;
+  }
+
+  #login,
+  #member-center {
+    display: none;
+    align-items: center;
+  }
+
+  #login {
+    width: 81px;
+  }
+
+  .hero-section {
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  img {
+    object-fit: cover;
+    /* 填滿元素的寬度及高度(維持原比例)，超出的部分會被裁切 */
+  }
+
+  .welcome-picture {
+    height: 480px;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+
+  .slogan {
+    width: 1200px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+    position: absolute;
+  }
+
+  .container {
+    width: 1180px;
+    height: 149px;
+    position: relative;
+  }
+
+  .slogan-container {
+    width: 1180px;
+    height: 78px;
+  }
+
+  .slogan-main {
+    width: 1180px;
+    height: 41px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #F8F8F8;
+  }
+
+  .slogan-sub {
+    width: 1180px;
+    height: 22px;
+    top: 56px;
+    position: absolute;
+    /*此處top: 56px;、position: absolute;
+    和.banner-container的position: relative;是一組*/
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #F8F8F8;
+  }
+
+  .search {
+    width: 1180px;
+    height: 46px;
+    top: 103px;
+    position: absolute;
+  }
+
+  .search-bar {
+    width: 460px;
+    height: 46px;
+    display: flex;
+  }
+
+  .search-input {
+    width: 400px;
+    height: 46px;
+    box-shadow: 0px 0px 20px 0px #AABBCC;
+  }
+
+  .search-input-border {
+    width: 400px;
+    height: 46px;
+    background: #FFFFFF;
+    border-radius: 4px 0 0 4px;
+    position: relative;
+  }
+
+  .search-input-text {
+    width: 370px;
+    height: 16px;
+    top: 15px;
+    left: 15px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    border: none;
+    outline: none;
+  }
+
+  .search-btn {
+    width: 60px;
+    height: 46px;
+    left: 400px;
+  }
+
+  .search-btn-bg {
+    width: 60px;
+    height: 46px;
+    background: #448899;
+    border-radius: 0 4px 4px 0;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .search-order-bg {
+    width: 30px;
+    height: 30px;
+    background: #448899;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .search-btn-icon {
+    width: 30px;
+    height: 30px;
+    top: 8px;
+    left: 15px;
+    position: absolute;
+  }
+
+  main {
+    min-height: 966px;
+    padding: 40px 0px 40px 0px;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-container {
+    width: 1200px;
+    min-height: 936px;
+  }
+
+  .list-bar {
+    width: 1200px;
+    height: 70px;
+    padding: 0px 0px 20px 0px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-container {
+    width: 47px;
+    height: 50px;
+    padding: 9px 0px 9px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .button-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .middle-container {
+    width: 1106px;
+    height: 50px;
+    padding: 13px 10px 13px 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .listItem-container {
+    width: 1086px;
+    height: 24px;
+    overflow: hidden;
+    /*自動隱藏超出的文字或圖片*/
+    white-space: nowrap;
+    /*空白字元強制不換行*/
+    display: flex;
+    align-items: center;
+  }
+
+  .listItem {
+    height: 24px;
+    padding: 5px 15px 5px 15px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .itemText {
+    height: 14px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    color: #666666;
+    z-index: 88;
+    cursor: pointer;
+  }
+
+  .right-container {
+    width: 47px;
+    height: 50px;
+    padding: 9px 15px 9px 0px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .attractions {
+    width: 1200px;
+    min-height: 816px;
+    padding: 15px;
+    position: relative;
+  }
+
+  .attractions-group {
+    width: 1170px;
+    min-height: 786px;
+    top: 15px;
+    left: 15px;
+    /* position: absolute; 若加上會使偵測scroll失效，後續研究一下position */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+
+  .attraction {
+    width: 270px;
+    height: 242px;
+    border-radius: 5px;
+
+    border: 1px solid #E8E8E8;
+    position: relative;
+  }
+
+  .details-bottom {
+    width: 270px;
+    height: 45px;
+    top: 197px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    background: #FFFFFF;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .details-info {
+    width: 250px;
+    height: 25px;
+    display: flex;
+    position: relative;
+  }
+
+  .mrt {
+    width: 125px;
+    height: 25px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;
+
+    display: flex;
+    align-items: center;
+  }
+
+  .category {
+    width: 125px;
+    height: 25px;
+    left: 125px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    color: #757575;
+
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: right;
+  }
+
+  .details-middle {
+    width: 270px;
+    height: 40px;
+    top: 157px;
+    gap: 4px;
+    position: absolute;
+  }
+
+  .name-bg {
+    width: 270px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    position: relative;
+  }
+
+  .name-info {
+    width: 250px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .name {
+    width: 250px;
+    height: 20px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+  }
+
+  .attraction-img {
+    width: 270px;
+    height: 197px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  footer {
+    min-height: 104px;
+    background: #757575;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+  }
+
+  .copyright-container {
+    width: 234px;
+    height: 24px;
+    padding: 5px 0px 5px 0px;
+  }
+
+  .copyright {
+    width: 234px;
+    height: 14px;
+    top: 5px;
+    position: relative;
+    display: block;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+  }
+
+  .separator-nav {
+    top: 54px;
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+
+  .attraction-section {
+    width: 1200px;
+    height: 400px;
+    /* position: absolute; 好像會跟margin: 0 auto衝突後續可再研究*/
+    margin: 0 auto;
+    padding: 40px 0px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .profile-picture {
+    width: 540px;
+    height: 400px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0 0 0 15px;
+  }
+
+  .loading {
+    position: absolute;
+    top: 135px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .loading-text {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #448899;
+  }
+
+  .loading-bar {
+    width: calc(100% - 112px);
+    height: 30px;
+    border: 3px solid #448899;
+    border-radius: 12px;
+    margin: 25px;
+    padding: 0 0 0 8px;
+
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-gap: 3px;
+    align-items: center;
+  }
+
+  .loading-block {
+    background-color: #448899;
+    width: 15px;
+    height: 22px;
+    border-radius: 5px;
+  }
+
+  .profile-img {
+    width: 540px;
+    height: 406px;
+    top: -3px;
+    position: absolute;
+    display: none;
+  }
+
+  .attraction-button {
+    width: calc(540px - 20px);
+    height: 36px;
+    top: 182px;
+    opacity: 0.75;
+    position: absolute;
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .attraction-circle {
+    height: 12px;
+    top: 378px;
+    opacity: 0.75;
+    position: absolute;
+  }
+
+  .circle-current {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #FFFFFF;
+    border-radius: 999em;
+    margin: 0px 6px 0px 6px;
+  }
+
+  .circle {
+    width: 12px;
+    height: 12px;
+    margin: 0px 6px 0px 6px;
+  }
+
+  .profile {
+    width: 600px;
+    height: 400px;
+    position: relative;
+    padding: 0 15px 0 0;
+  }
+
+  .profile-name {
+    width: 600px;
+    height: 33px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .profile-category {
+    width: 600px;
+    height: 22px;
+    top: 48px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-form {
+    width: 600px;
+    height: 302px;
+    top: 90px;
+    border-radius: 5px;
+    position: absolute;
+
+    background: #E8E8E8;
+  }
+
+  .booking-title {
+    width: 560px;
+    height: 22px;
+    top: 15px;
+    left: 20px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-sub {
+    width: 560px;
+    height: 24px;
+    top: 52px;
+    left: 20px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-date {
+    width: 560px;
+    height: 35px;
+    top: 91px;
+    left: 20px;
+    position: absolute;
+    display: flex;
+  }
+
+  .booking-date-title {
+    width: 81px;
+    height: 17px;
+    top: 9px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-date-container {
+    width: 193px;
+    height: 35px;
+    background: #FFFFFF;
+    position: absolute;
+    left: 86px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .placeholder {
+    width: 149px;
+    height: 25px;
+    background-color: white;
+    z-index: 100;
+    left: 10px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+  }
+
+  .date {
+    width: 173px;
+    height: 25px;
+    border: 0;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    left: 10px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+    z-index: 10;
+  }
+
+  [class="date"]::placeholder {
+    color: black;
+    opacity: 1;
+  }
+
+  /* [type="date"] {
+    background: transparent 100% 50% no-repeat;
+  } */
+
+  /* [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  } */
+
+  [type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url('/picture/calendar.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 21.5px;
+    cursor: pointer;
+  }
+
+  .booking-time {
+    width: 560px;
+    height: 22px;
+    top: 141px;
+    left: 20px;
+    position: absolute;
+    display: flex;
+  }
+
+  .booking-time-title {
+    width: 81px;
+    height: 22px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-time-am {
+    width: 87px;
+    height: 22px;
+    left: 86px;
+    padding: 0px 8px 0px 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-time-pm {
+    width: 87px;
+    height: 22px;
+    left: 178px;
+    padding: 0px 8px 0px 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .day-button-am,
+  .day-button-pm {
+    width: 22px;
+    height: 22px;
+    left: 5px;
+    position: absolute;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .day-outline {
+    width: 22px;
+    height: 22px;
+    position: relative;
+  }
+
+  .day-core {
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+  }
+
+  .day-text {
+    width: 48px;
+    height: 14px;
+    top: 4px;
+    left: 31px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-price {
+    width: 560px;
+    height: 22px;
+    top: 178px;
+    left: 20px;
+    position: absolute;
+  }
+
+  .booking-price-title {
+    width: 81px;
+    height: 22px;
+    top: 4px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-price-amount {
+    width: 108px;
+    height: 14px;
+    top: 4px;
+    left: 86px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-button {
+    width: 154px;
+    height: 36px;
+    top: 225px;
+    left: 20px;
+    border-radius: 5px;
+    position: absolute;
+    background: #448899;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .booking-button-text {
+    width: 114px;
+    height: 16px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .separator-main {
+    width: 1200px;
+    margin: 0 auto;
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+
+  .info {
+    width: 1200px;
+    top: 520px;
+    display: block;
+    padding: 40px 0 0 0;
+    margin: 0 auto;
+  }
+
+  .description {
+    width: 1180px;
+    padding: 10px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .address-title {
+    width: 1180px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .address {
+    width: 1180px;
+    /* height: 24px; */
+    padding: 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .transport-title {
+    width: 1180px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .transport {
+    width: 1180px;
+    padding: 0 10px 10px 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .attraction-footer {
+    width: 100%;
+    height: 104px;
+    background: #757575;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    margin: 40px 0 0 0;
+    padding: 40px 0 0 0;
+  }
+
+  .img-right,
+  .img-left {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+
+  .dialog-mask {
+    width: 100%;
+    height: 100%;
+    /* opacity: 0.25; */
+    background: rgba(0, 0, 0, 0.25);
+    /*rgba可使上方物件不會也變透明*/
+    z-index: 999;
+    padding: 0;
+    border: 0;
+    position: absolute;
+    top: 0;
+    /* display: flex; */
+    justify-content: center;
+  }
+
+  .dialog-box {
+    width: 340px;
+    margin: 80px 0 40px 0;
+    height: 275px;
+    border-radius: 6px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 60px 0px #AAAAAA;
+    display: inline-block;
+  }
+
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    border-radius: 6px 6px 0 0;
+  }
+
+  .dialog-main-container {
+    display: flex;
+    position: relative;
+  }
+
+  .dialog-close {
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    left: 300px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  .dialog-main {
+    width: 310px;
+    top: 15px;
+    left: 15px;
+    position: absolute;
+
+  }
+
+  .dialog-title {
+    width: 310px;
+    height: 27px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #666666;
+    margin: 0 0 15px 0;
+  }
+
+  .input,
+  .input-username,
+  .input-email {
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    box-shadow: 1px 0 #CCCCCC, -1px 0 #CCCCCC, 0 1px #CCCCCC, 0 -1px #CCCCCC;
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .input-text {
+    width: 280px;
+    height: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;
+    border: none;
+    outline: none;
+  }
+
+  .dialog-button {
+    width: 310px;
+    height: 47px;
+    padding: 0;
+    border-radius: 5px;
+    background: #448899;
+    border: 0;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+
+  .message {
+    width: 310px;
+    height: 22px;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: center;
+    display: none;
+  }
+
+  .switch-signin,
+  .switch-signup {
+    width: 310px;
+    height: 22px;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666666;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .switch-signin:hover,
+  .switch-signup:hover {
+    color: #448899
+  }
+
+  .booking-content {
+    display: none;
+  }
+
+  .booking-container,
+  .headline,
+  .booking-none {
+    width: 1000px;
+    margin: 0 auto;
+  }
+
+  .headline {
+    height: 27px;
+    padding: 40px 0 30px 0;
+  }
+
+  .main-words {
+    padding: 10px 0 10px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .thank-main {
+    display: none;
+    justify-content: center;
+  }
+
+  .profile-main {
+    display: flex;
+    justify-content: center;
+  }
+
+  .thank-container {
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  .sub-words {
+    height: 27px;
+    padding: 10px 0 10px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-none,
+  .sub-words {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+    height: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .headline,
+  .main-words,
+  .userName {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-section {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #order-section:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .booking-picture {
+    width: 250px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    /*自動隱藏超出的文字或圖片*/
+    white-space: nowrap;
+  }
+
+  .booking-img {
+    width: 266px;
+    height: 200px;
+  }
+
+  .booking-info {
+    width: calc(100% - 280px);
+    position: relative;
+  }
+
+  .delete {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+
+  .booking-info-title {
+    min-height: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #448899;
+    margin: 0 0 20px 0;
+    display: block;
+    line-height: 23.17px;
+  }
+
+  .booking-info-item {
+    height: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-info-date,
+  .booking-info-time,
+  .booking-info-price,
+  .booking-info-address {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0 0 0 5px;
+  }
+
+  #booking-address {
+    min-height: 24px;
+    display: block;
+    line-height: 23.17px;
+    height: 100%;
+    margin: 0;
+  }
+
+  .separator-booking {
+    width: 1200px;
+    border: 1px;
+    margin: 40px auto;
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+
+  .contact-form {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+  }
+
+  .contact-form-title {
+    height: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+    padding: 0 0 5px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-form-item {
+    height: 38px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+    margin: 15px 0 0 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-name,
+  .contact-email,
+  .contact-phone {
+    width: 200px;
+    height: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 0 #E8E8E8, -1px 0 #E8E8E8, 0 1px #E8E8E8, 0 -1px #E8E8E8;
+    border: 0;
+    outline: none;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+  }
+
+  #card-number,
+  #card-expiration-date,
+  #card-ccv {
+    width: 200px;
+    height: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 0 #E8E8E8, -1px 0 #E8E8E8, 0 1px #E8E8E8, 0 -1px #E8E8E8;
+    border: 0;
+    outline: none;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;
+  }
+
+  #card-remind,
+  #expiry-remind,
+  #cvv-remind {
+    display: none;
+    color: red;
+    align-items: center;
+    width: 150px;
+    justify-content: end;
+    margin: 0;
+  }
+
+  .contact-notice {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  #contact-notice {
+    height: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-confirm {
+    width: calc(100% - 20px);
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .booking-total {
+    width: 100%;
+    height: 20px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: right;
+    color: #666666;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .booking-submit-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .booking-submit-button {
+    width: 173px;
+    height: 36px;
+    padding: 10px, 20px, 10px, 20px;
+    border-radius: 5px;
+    background: #448899;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+  }
+
+  .tappay-field-focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  }
+
+}
+
+@media screen and (max-width:1200px) {
+
+  .nav-container {
+    width: 100%;
+    height: 54px;
+    position: relative;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 0 10px;
+  }
+
+  .frame2 {
+    display: flex;
+    justify-content: space-between;
+    right: 8px;
+    position: absolute;
+  }
+
+  .nav-button2 {
+    width: 111px;
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 2px 0px 10px;
+    left: 84px;
+  }
+
+  .slogan {
+    width: 736px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+    display: flex;
+  }
+
+  .container {
+    width: 716px;
+    height: 149px;
+    padding: 10px;
+    gap: 25px;
+    display: flex;
+    position: relative;
+  }
+
+  .slogan-container {
+    width: 716px;
+    height: 78px;
+    padding: 10px 0 0 0;
+  }
+
+
+  .slogan-main {
+    width: 320px;
+    height: 41px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #F8F8F8;
+  }
+
+  .slogan-sub {
+    width: 320px;
+    height: 22px;
+    top: 76px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #F8F8F8;
+  }
+
+  .search {
+    width: 716px;
+    height: 46px;
+    top: 118px;
+    position: absolute;
+  }
+
+  main {
+    min-height: 715px;
+    padding: 40px 15px 0px 15px;
+    margin: 0 auto;
+  }
+
+  .main-container {
+    width: 100%;
+    min-height: 715px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .list-bar {
+    width: 100%;
+    height: 70px;
+    padding: 0px 0px 20px 0px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+  }
+
+  .middle-container {
+    width: calc(100% - 94px);
+    height: 50px;
+    padding: 13px 0px;
+    display: flex;
+    align-items: center;
+  }
+
+  .listItem-container {
+    height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .attractions {
+    width: 100%;
+    min-height: 605px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .attractions-group {
+    width: 100%;
+    min-height: 786px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 15px;
+  }
+
+  .attraction {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+
+    border: 1px solid #E8E8E8;
+    position: relative;
+  }
+
+  .details-bottom {
+    width: 100%;
+    height: 45px;
+    top: 235px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    background: #FFFFFF;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .details-info {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 10px;
+  }
+
+  .mrt {
+    width: 100%;
+    height: 25px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;
+
+    display: flex;
+    align-items: center;
+  }
+
+  .category {
+    width: 100%;
+    height: 25px;
+    left: 0px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    color: #757575;
+
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .details-middle {
+    width: 100%;
+    height: 40px;
+    top: 195px;
+    gap: 4px;
+    position: absolute;
+  }
+
+  .name-bg {
+    width: 100%;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    position: relative;
+  }
+
+  .name-info {
+    width: calc(100% - 20px);
+    height: 20px;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+  }
+
+  .name {
+    width: 100%;
+    height: 20px;
+    display: flex;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+  }
+
+  .attraction-img {
+    width: 100%;
+    height: 235px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .attraction-section {
+    width: calc(100% - 30px);
+    height: 400px;
+    padding: 40px 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .profile-picture {
+    width: calc(100% - 425px);
+    height: 400px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 406px;
+    top: -3px;
+    position: absolute;
+  }
+
+  .attraction-button {
+    width: calc(100% - 20px);
+    height: 36px;
+    top: 182px;
+    opacity: 0.75;
+    position: absolute;
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .attraction-circle {
+    height: 12px;
+    top: 0;
+    opacity: 0.75;
+    position: static;
+    padding: 0 0 22px 0;
+  }
+
+  .circle-current {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #FFFFFF;
+    border-radius: 999em;
+    margin: 0px 6px 0px 6px;
+  }
+
+  .circle {
+    width: 12px;
+    height: 12px;
+    margin: 0px 6px 0px 6px;
+  }
+
+  .profile {
+    width: 410px;
+    height: 400px;
+    position: relative;
+    padding: 0;
+    margin: 0 0 0 10px;
+  }
+
+  .profile-name {
+    width: 410px;
+    height: 33px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .profile-category {
+    width: 410px;
+    height: 22px;
+    top: 48px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-form {
+    width: 410px;
+    height: 302px;
+    top: 90px;
+    border-radius: 5px;
+    position: absolute;
+
+    background: #E8E8E8;
+  }
+
+  .booking-title {
+    width: 390px;
+    height: 22px;
+    top: 15px;
+    left: 20px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-sub {
+    width: 390px;
+    height: 24px;
+    top: 52px;
+    left: 20px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-date {
+    width: 390px;
+    height: 35px;
+    top: 91px;
+    left: 20px;
+    position: absolute;
+    display: flex;
+  }
+
+  .booking-date-title {
+    width: 81px;
+    height: 17px;
+    top: 9px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-date-container {
+    width: 193px;
+    height: 35px;
+    background: #FFFFFF;
+    position: absolute;
+    left: 86px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date {
+    width: 173px;
+    height: 25px;
+    border: 0;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    left: 10px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+  }
+
+  .calendar {
+    right: 10px;
+    position: absolute;
+    background-image: url("/picture/calendar.png");
+    width: 24px;
+    height: 24px;
+    z-index: 0;
+  }
+
+  [class="date"]::placeholder {
+    color: black;
+    opacity: 1;
+  }
+
+  /* [type="date"] {
+    background: transparent 100% 50% no-repeat;
+  } */
+
+  /* [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  } */
+
+  .booking-time {
+    width: 390px;
+    height: 22px;
+    top: 141px;
+    left: 20px;
+    position: absolute;
+    display: flex;
+  }
+
+  .booking-time-title {
+    width: 81px;
+    height: 22px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-time-am {
+    width: 87px;
+    height: 22px;
+    left: 86px;
+    padding: 0px 8px 0px 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-time-pm {
+    width: 87px;
+    height: 22px;
+    left: 178px;
+    padding: 0px 8px 0px 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .day-button-am,
+  .day-button-pm {
+    width: 22px;
+    height: 22px;
+    left: 5px;
+    position: absolute;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .day-outline {
+    width: 22px;
+    height: 22px;
+    position: relative;
+  }
+
+  .day-core {
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+  }
+
+  .day-text {
+    width: 48px;
+    height: 14px;
+    top: 4px;
+    left: 31px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-price {
+    width: 390px;
+    height: 22px;
+    top: 178px;
+    left: 20px;
+    position: absolute;
+  }
+
+  .booking-price-title {
+    width: 81px;
+    height: 22px;
+    top: 4px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-price-amount {
+    width: 108px;
+    height: 14px;
+    top: 4px;
+    left: 86px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-button {
+    width: 154px;
+    height: 36px;
+    top: 225px;
+    left: 20px;
+    border-radius: 5px;
+    position: absolute;
+    background: #448899;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-button-text {
+    width: 114px;
+    height: 16px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .separator-main {
+    width: 100%;
+    border: 1px;
+    margin: 0 auto;
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+
+  .info {
+    width: calc(100% - 30px);
+    top: 520px;
+    display: block;
+    padding: 40px 0 0 0;
+    margin: 0 auto;
+  }
+
+  .description {
+    width: calc(100% - 20px);
+    padding: 10px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .address-title {
+    width: calc(100% - 20px);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .address {
+    width: calc(100% - 20px);
+    padding: 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .transport-title {
+    width: calc(100% - 20px);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .transport {
+    width: calc(100% - 20px);
+    padding: 0 10px 10px 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .attraction-footer {
+    width: 100%;
+    height: 104px;
+    background: #757575;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    bottom: 0;
+    margin: 40px 0 0 0;
+    padding: 40px 0 0 0;
+  }
+
+  .img-right,
+  .img-left {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+
+  .headline,
+  .booking-none {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+  }
+
+  .booking-container {
+    width: 100%;
+  }
+
+  .separator-booking {
+    width: calc(100% - 20px);
+  }
+
+}
+
+
+@media screen and (max-width:830px) and (min-width:360px) {
+
+  html,
+  body {
+    margin: 0;
+  }
+
+  .navigation {
+    height: 54px;
+    background: #FFFFFF;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-container {
+    width: 100%;
+    height: 54px;
+    position: relative;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-text {
+    width: 150px;
+    height: 34px;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #448899;
+  }
+
+  .frame1 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-button1 {
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0 0 0;
+    cursor: pointer;
+  }
+
+  .nav-button2 {
+    width: 111px;
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 2px 0px 10px;
+    left: 84px;
+  }
+
+  .nav-button1-text {
+    width: 64px;
+    height: 14px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .nav-button2-text {
+    width: 71px;
+    height: 14px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .hero-section {
+    height: 320px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  img {
+    object-fit: cover;
+    /* 填滿元素的寬度及高度(維持原比例)，超出的部分會被裁切 */
+  }
+
+  .welcome-picture {
+    width: 1283px;
+    height: 320px;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+
+  .slogan {
+    width: 340px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+    display: flex;
+  }
+
+  .container {
+    width: 320px;
+    height: 149px;
+    padding: 10px;
+    gap: 25px;
+    display: flex;
+    position: relative;
+  }
+
+  .slogan-container {
+    width: 320px;
+    height: 78px;
+    padding: 10px 0 0 0;
+  }
+
+  .slogan-main {
+    width: 320px;
+    height: 41px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #F8F8F8;
+  }
+
+  .slogan-sub {
+    width: 320px;
+    height: 22px;
+    top: 76px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #F8F8F8;
+  }
+
+  .search {
+    width: 285px;
+    height: 46px;
+    top: 118px;
+    position: absolute;
+  }
+
+  .search-bar {
+    width: 225px;
+    height: 46px;
+  }
+
+  .search-input {
+    width: 225px;
+    height: 46px;
+    display: flex;
+    box-shadow: 0px 0px 20px 0px #AABBCC;
+  }
+
+  .search-input-border {
+    width: 230px;
+    height: 46px;
+    background: #FFFFFF;
+    border-radius: 4px 0 0 4px;
+    position: relative;
+  }
+
+  .search-input-text {
+    width: 195px;
+    height: 16px;
+    top: 15px;
+    left: 15px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    border: none;
+    outline: none;
+    color: #757575;
+  }
+
+  .search-btn {
+    width: 60px;
+    height: 46px;
+    left: 225px;
+  }
+
+  .search-btn-bg {
+    width: 60px;
+    height: 46px;
+    background: #448899;
+    border-radius: 0 4px 4px 0;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .search-btn-icon {
+    width: 30px;
+    height: 30px;
+    top: 8px;
+    left: 15px;
+    position: absolute;
+  }
+
+  main {
+    min-height: 715px;
+    padding: 40px 0px 0px 0px;
+  }
+
+  .main-container {
+    min-height: 715px;
+  }
+
+  .list-bar {
+    width: 100%;
+    height: 70px;
+    padding: 0px 0px 20px 0px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+  }
+
+  .left-container {
+    width: 47px;
+    height: 50px;
+    padding: 9px 0px 9px 0px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: right;
+  }
+
+  .button-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .middle-container {
+    width: calc(100% -94px);
+    height: 50px;
+    padding: 13px 0px;
+    display: flex;
+    align-items: center;
+  }
+
+  .listItem-container {
+    width: 100%;
+    height: 24px;
+    overflow: hidden;
+    /*自動隱藏超出的文字或圖片*/
+    white-space: nowrap;
+    /*空白字元強制不換行*/
+    display: flex;
+    align-items: center;
+  }
+
+  .listItem {
+    height: 24px;
+    padding: 5px 15px 5px 15px;
+    gap: 4px;
+  }
+
+  .itemText {
+    height: 14px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    color: #666666;
+    z-index: 88;
+    cursor: pointer;
+  }
+
+  .right-container {
+    width: 47px;
+    height: 50px;
+    padding: 9px 0px 9px 0px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .attractions {
+    width: calc(100% - 8px);
+    min-height: 605px;
+    padding: 0px 4px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .attractions-group {
+    width: 100%;
+    min-height: 605px;
+    display: block;
+  }
+
+  .attraction {
+    width: calc(100% - 30px);
+    height: 280px;
+    border-radius: 5px;
+    margin: 15px;
+
+    border: 1px solid #E8E8E8;
+    position: relative;
+  }
+
+  .details-bottom {
+    width: 100%;
+    ;
+    height: 45px;
+    top: 235px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    background: #FFFFFF;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .details-info {
+    width: calc(100% - 20px);
+    height: 25px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+  }
+
+  .mrt {
+    width: 100%;
+    height: 25px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;
+
+    display: flex;
+    align-items: center;
+  }
+
+  .category {
+    width: 100%;
+    height: 25px;
+    left: 0px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    color: #757575;
+
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: right;
+  }
+
+  .details-middle {
+    width: 100%;
+    ;
+    height: 40px;
+    top: 195px;
+    gap: 4px;
+    position: absolute;
+  }
+
+  .name-bg {
+    width: 100%;
+    ;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    position: relative;
+  }
+
+  .name-info {
+    width: 302px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+  }
+
+  .name {
+    width: 302px;
+    height: 20px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+  }
+
+  .attraction-img {
+    width: 100%;
+    height: 235px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  footer {
+    height: 104px;
+    padding: 0;
+    background: #757575;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+  }
+
+  .copyright-container {
+    width: 234px;
+    height: 24px;
+    padding: 5px 0px 5px 0px;
+  }
+
+  .copyright {
+    width: 234px;
+    height: 14px;
+    top: 5px;
+    position: relative;
+    display: block;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+  }
+
+  .separator-nav {
+    top: 54px;
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+
+  .attraction-section {
+    width: 100%;
+    height: 100%;
+    /* display: block; 
+    block：若父元素長度 < 子元素長度加總，外部長度仍為父元素長度；反之，則外部長度為子元素長度加總 */
+    display: inline;
+    /*inline的長寬為自適應，無法也無須另做設定*/
+    padding: 0px;
+  }
+
+  .profile-picture {
+    width: 100%;
+    height: 350px;
+    border-radius: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 350px;
+    top: 0;
+    position: absolute;
+  }
+
+  .attraction-button {
+    width: calc(100% - 20px);
+    height: 36px;
+    top: 182px;
+    opacity: 0.75;
+    position: absolute;
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .attraction-circle {
+    height: 12px;
+    top: 0;
+    opacity: 0.75;
+    position: static;
+    padding: 0 0 22px 0;
+  }
+
+  .circle-current {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #FFFFFF;
+    border-radius: 999em;
+    margin: 0px 6px 0px 6px;
+  }
+
+  .circle {
+    width: 12px;
+    height: 12px;
+    margin: 0px 6px 0px 6px;
+  }
+
+  .profile {
+    width: 340px;
+    height: 390px;
+    position: relative;
+    padding: 20px 0 0 0;
+    margin: 0 auto;
+  }
+
+  .profile-name {
+    width: 340px;
+    height: 33px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .profile-category {
+    width: 340px;
+    height: 22px;
+    padding: 15px 0 20px 0;
+    position: relative;
+    top: 0;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-form {
+    width: 340px;
+    height: 300px;
+    top: 0px;
+    border-radius: 5px;
+    position: relative;
+
+    background: #E8E8E8;
+  }
+
+  .booking-title {
+    width: 300px;
+    height: 22px;
+    position: static;
+    padding: 15px 0 0 20px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-sub {
+    width: 300px;
+    height: 48px;
+    padding: 15px 0 0 20px;
+    position: static;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-date {
+    width: 300px;
+    height: 35px;
+    position: static;
+    display: flex;
+    align-items: center;
+    padding: 15px 0 0 20px;
+  }
+
+  .booking-date-title {
+    width: 81px;
+    height: 17px;
+    position: static;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .booking-date-container {
+    width: 193px;
+    height: 35px;
+    background: #FFFFFF;
+    position: absolute;
+    left: 0;
+    margin: 0 0 0 106px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date {
+    width: 173px;
+    height: 25px;
+    border: 0;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    left: 10px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+  }
+
+  .calendar {
+    right: 10px;
+    position: absolute;
+    background-image: url("/picture/calendar.png");
+    width: 24px;
+    height: 24px;
+    z-index: 0;
+  }
+
+  [class="date"]::placeholder {
+    color: black;
+    opacity: 1;
+  }
+
+  .booking-time {
+    width: 300px;
+    height: 22px;
+    position: static;
+    display: flex;
+    padding: 15px 0 0 20px;
+  }
+
+  .booking-time-title {
+    width: 81px;
+    height: 22px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-time-am {
+    width: 87px;
+    height: 22px;
+    left: 106px;
+    padding: 0px 8px 0px 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-time-pm {
+    width: 87px;
+    height: 22px;
+    left: 198px;
+    padding: 0px 8px 0px 5px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+  }
+
+  .day-button-am,
+  .day-button-pm {
+    width: 22px;
+    height: 22px;
+    left: 5px;
+    position: absolute;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .day-outline {
+    width: 22px;
+    height: 22px;
+    position: relative;
+  }
+
+  .day-core {
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+  }
+
+  .day-text {
+    width: 48px;
+    height: 14px;
+    top: 4px;
+    left: 31px;
+    position: absolute;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-price {
+    width: 300px;
+    height: 22px;
+    position: static;
+    padding: 15px 0 0 20px;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-price-title {
+    width: 81px;
+    height: 22px;
+    top: 0;
+    position: static;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-price-amount {
+    width: 108px;
+    height: 14px;
+    position: static;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .booking-button {
+    width: 154px;
+    height: 36px;
+    top: 0;
+    left: 0;
+    margin: 25px 0px 0px 20px;
+    border-radius: 5px;
+    position: static;
+    background: #448899;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booking-button-text {
+    width: 114px;
+    height: 16px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .separator-main {
+    width: calc(100% - 20px);
+    border: 1px;
+    position: static;
+    top: 0;
+    left: 0;
+    margin: 40px auto;
+
+    height: 1px;
+    background-color: #E8E8E8;
+  }
+
+  .info {
+    width: calc(100% - 20px);
+    top: 520px;
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .description {
+    width: calc(100% - 10px);
+    padding: 10px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .address-title {
+    width: calc(100% - 10px);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .address {
+    width: calc(100% - 10px);
+    padding: 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .transport-title {
+    width: calc(100% - 10px);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 0 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #666666;
+  }
+
+  .transport {
+    width: calc(100% - 10px);
+    padding: 0 10px 10px 10px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.17px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #666666;
+  }
+
+  .attraction-footer {
+    width: 100%;
+    height: 104px;
+    background: #757575;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    margin: 40px 0 0 0;
+    padding: 40px 0 0 0;
+  }
+
+  .img-right,
+  .img-left {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+
+  .booking-section {
+    flex-direction: column;
+  }
+
+  .booking-picture,
+  .booking-img {
+    width: 100%;
+  }
+
+  .booking-info {
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  .delete {
+    width: 100%;
+    top: 100%;
+    display: flex;
+    justify-content: end;
+  }
+
+  #separator-shorten {
+    margin: 30px auto 40px auto;
+  }
+
+  .contact-notice {
+    line-height: 23.17px;
+  }
+
+  #contact-notice {
+    margin: 20px 0 0 0;
+    height: 48px;
+  }
+}
+
+@media screen and (max-width:830px) and (min-width:530px) {
+  .attractions-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 15px
+  }
+
+  .main-container {
+    width: 100%;
+  }
+
+  .list-bar {
+    width: 100%;
+  }
+
+  .middle-container {
+    width: calc(100% - 94px);
+  }
+
+  .listItem-container {
+    width: 100%;
+  }
+
+  .attractions {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+  }
+
+  .attraction {
+    width: 100%;
+    margin: 0;
+  }
+
+  .details-bottom {
+    width: 100%;
+  }
+
+  .details-info {
+    width: 100%;
+  }
+
+  .mrt {
+    width: 100%;
+  }
+
+  .category {
+    width: 100%;
+    left: 0px;
+  }
+
+  .details-middle {
+    width: 100%;
+  }
+
+  .name-bg {
+    width: 100%;
+  }
+
+  .attraction-img {
+    width: 100%;
+  }
+
+  .name-info {
+    width: calc(100% - 20px);
+  }
+
+  .name {
+    width: 100%;
+  }
+
+  .booking-picture,
+  .booking-img {
+    width: 100%;
+    height: 350px;
+  }
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('head') %>
+    <link rel="stylesheet" href="../template.css" />
+  </head>
+
+  <body>
+    <%- include('nav') %> <%- include('dialog') %>
+    <div class="separator-nav"></div>
+
+    <div class="attraction-section">
+      <div class="profile-picture">
+        <img src="" class="profile-img" />
+
+        <div class="loading">
+          <div class="loading-text">LOADING...</div>
+          <div class="loading-bar">
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+            <div class="loading-block"></div>
+          </div>
+        </div>
+
+        <div class="attraction-button">
+          <img class="img-left" src="/picture/attraction-arrow-left.png" />
+          <img class="img-right" src="/picture/attraction-arrow-right.png" />
+        </div>
+
+        <div class="attraction-circle">
+          <img class="circle-current" src="/picture/circle-current.png" />
+        </div>
+      </div>
+
+      <div class="profile">
+        <div class="profile-name"></div>
+
+        <div class="profile-category"></div>
+
+        <div class="booking-form">
+          <div class="booking-title">訂購導覽行程</div>
+          <div class="booking-sub">
+            以此景點為中心的一日行程，帶您探索城市角落故事
+          </div>
+          <div class="booking-date">
+            <span class="booking-date-title">選擇日期：</span>
+            <div class="booking-date-container">
+              <span class="placeholder">yyyy/mm/dd</span>
+              <!-- <input type="text" class="date" onfocus="(this.type='date')" required> -->
+              <input type="date" class="date" min="" required />
+            </div>
+          </div>
+          <div class="booking-time">
+            <span class="booking-time-title">選擇時間：</span>
+            <div class="booking-time-am">
+              <div class="day-button-am">
+                <img class="day-outline" src="/picture/day-outline.png" />
+                <img class="day-core" src="/picture/day-btn.png" />
+              </div>
+              <div class="day-text">上半天</div>
+            </div>
+            <div class="booking-time-pm">
+              <div class="day-button-pm">
+                <img class="day-outline" src="/picture/day-outline.png" />
+              </div>
+              <div class="day-text">下半天</div>
+            </div>
+          </div>
+          <div class="booking-price">
+            <div class="booking-price-title">導覽費用：</div>
+            <div class="booking-price-amount">新台幣 2000 元</div>
+          </div>
+          <div class="booking-button" onclick="booking()">
+            <span class="booking-button-text">開始預約行程</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="separator-main"></div>
+
+    <div class="info">
+      <div class="description"></div>
+      <div class="address-title">景點地址：</div>
+      <div class="address"></div>
+      <div class="transport-title">交通方式：</div>
+      <div class="transport"></div>
+    </div>
+    <%- include('footer') %> <%- include('script') %>
+    <script>
+      function fetchAPI(id) {
+        url = "/api/attractions/" + id;
+
+        const data = fetch(url, { method: "get" })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            if (responseJson["error"]) {
+              return (window.location.href = "/");
+            } else {
+              return responseJson["data"];
+            }
+          })
+          .catch((error) => (window.location.href = "/"));
+
+        return data;
+      }
+
+      function getAttraction(data) {
+        document.querySelector(".profile-name").textContent = data["name"];
+        document.querySelector(".address").textContent = data["address"];
+        document.querySelector(".profile-category").textContent =
+          data["category"] + " at " + data["mrt"];
+        document.querySelector(".description").textContent =
+          data["description"];
+        document.querySelector(".transport").textContent = data["transport"];
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        const tomorrow =
+          date.getFullYear() +
+          "-" +
+          (date.getMonth() + 1) +
+          "-" +
+          date.getDate();
+        document.querySelector(".date").min = tomorrow;
+
+        function loadImgCount() {
+          loadImgNum++;
+          if (loadImgNum === data["images"].length) {
+            document.querySelector(".profile-img").src =
+              data["images"][imgIndex];
+            document.querySelector(".profile-img").style.display = "flex";
+            document.querySelector(".loading").style.display = "none";
+            circleCounts.lastChild.remove();
+          }
+        }
+
+        let loadImgNum = 0;
+        for (let i = 0; i < data["images"].length; i++) {
+          const circle = document.createElement("img");
+          circle.classList.add("circle");
+          circle.src = "/picture/circle.png";
+          circleCounts.appendChild(circle);
+
+          let image = new Image();
+          image.src = data["images"][i]; // 載入景點圖片
+
+          if (image.complete) {
+            // 若圖片先前已被載入過
+
+            loadImgCount();
+          } else {
+            // 若圖片首次被載入
+
+            image.onload = function () {
+              loadImgCount();
+            };
+          }
+        }
+      }
+
+      function booking() {
+        /*longinStatus為layout.html的getStatus()回傳呼叫API驗證會員登入的結果*/
+        longinStatus.then((userInfo) => {
+          if (userInfo === null) {
+            dialog.style.display = "flex";
+            message.style.display = "none";
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          } else {
+            const date = document.querySelector(".date").value;
+            const today = new Date();
+            if (!date) {
+              return alert("請選擇日期");
+            }
+            if (new Date(date) <= today) {
+              return alert("無法選今天及過去日期");
+            }
+            const postMethod = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "bearer " + localStorage.getItem("token"),
+              },
+              body: JSON.stringify({
+                attractionId: id,
+                date: date,
+                time: time,
+                price: price,
+              }),
+            };
+
+            fetch("/api/booking", postMethod)
+              .then((response) => response.json())
+              .then((responseJson) => {
+                if (responseJson["ok"]) {
+                  window.location.href = "/booking";
+                } else {
+                  alert(responseJson["message"]);
+                }
+              })
+              .catch((error) => console.error("Error:", error));
+          }
+        });
+      }
+
+      const originUrl = location.href;
+      const index = originUrl.search("attraction/") + 11;
+      const id = Number(originUrl.slice(index));
+
+      const am = document.querySelector(".day-button-am");
+      const pm = document.querySelector(".day-button-pm");
+
+      const circleCounts = document.querySelector(".attraction-circle");
+      const imgRight = document.querySelector(".img-right");
+      const imgLeft = document.querySelector(".img-left");
+      const datePlaceholder = document.querySelector(".placeholder");
+      const calendar = document.querySelector(".date");
+      let imgIndex = 0;
+      let time = "morning";
+      let price = 2000;
+
+      // fetch該頁資料存到參數data，再去做後續渲染畫面及DOM監聽
+      const data = fetchAPI(id);
+
+      data
+        .then((data) => {
+          getAttraction(data);
+
+          am.addEventListener("click", () => {
+            const amSelect = am.querySelector(".day-core");
+            const pmSelect = pm.querySelector(".day-core");
+            time = "morning";
+            price = 2000;
+
+            if (!amSelect) {
+              const select = document.createElement("img");
+              select.classList.add("day-core");
+              select.src = "/picture/day-btn.png";
+              am.appendChild(select);
+              pmSelect.remove();
+              document.querySelector(".booking-price-amount").textContent =
+                "新台幣 2000 元";
+            }
+          });
+
+          pm.addEventListener("click", () => {
+            const amSelect = am.querySelector(".day-core");
+            const pmSelect = pm.querySelector(".day-core");
+            time = "afternoon";
+            price = 2500;
+
+            if (!pmSelect) {
+              const select = document.createElement("img");
+              select.classList.add("day-core");
+              select.src = "/picture/day-btn.png";
+              pm.appendChild(select);
+              amSelect.remove();
+              document.querySelector(".booking-price-amount").textContent =
+                "新台幣 2500 元";
+            }
+          });
+
+          imgRight.addEventListener("click", () => {
+            const circle = document.createElement("img");
+
+            if (imgIndex < data["images"].length - 1) {
+              imgIndex += 1;
+              circle.classList.add("circle");
+              circle.src = "/picture/circle.png";
+            } else {
+              imgIndex = 0;
+              circle.classList.add("circle-current");
+              circle.src = "/picture/circle-current.png";
+            }
+
+            circleCounts.insertBefore(circle, circleCounts.firstElementChild);
+            circleCounts.lastElementChild.remove();
+            document.querySelector(".profile-img").src =
+              data["images"][imgIndex];
+          });
+
+          imgLeft.addEventListener("click", () => {
+            const circle = document.createElement("img");
+
+            if (imgIndex > 0) {
+              imgIndex -= 1;
+              circle.classList.add("circle");
+              circle.src = "/picture/circle.png";
+            } else {
+              imgIndex = data["images"].length - 1;
+              circle.classList.add("circle-current");
+              circle.src = "/picture/circle-current.png";
+            }
+
+            circleCounts.appendChild(circle);
+            circleCounts.firstElementChild.remove();
+            document.querySelector(".profile-img").src =
+              data["images"][imgIndex];
+          });
+
+          datePlaceholder.addEventListener("click", () => {
+            datePlaceholder.style.display = "none";
+          });
+
+          calendar.addEventListener("click", () => {
+            datePlaceholder.style.display = "none";
+          });
+        })
+        .catch((error) => (window.location.href = "/"));
+    </script>
+  </body>
+</html>

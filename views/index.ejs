@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('head') %>
+    <link rel="stylesheet" href="template.css" />
+  </head>
+
+  <body>
+    <%- include('nav') %> <%- include('dialog') %>
+    <div class="hero-section">
+      <img class="welcome-picture" src="picture/taipei101.png" />
+      <div class="slogan">
+        <div class="container">
+          <div class="slogan-container">
+            <div class="slogan-main">輕鬆享受台北一日悠閒</div>
+            <div class="slogan-sub">探索每個角落，體驗城市的深度旅遊行程</div>
+          </div>
+          <div class="search">
+            <div class="search-bar">
+              <div class="search-input">
+                <div class="search-input-border">
+                  <input
+                    class="search-input-text"
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="輸入景點名稱查詢"
+                  />
+                </div>
+              </div>
+              <div class="search-btn">
+                <div class="search-btn-bg" onclick="search()">
+                  <div class="search-btn-icon">
+                    <img src="/picture/search.png" width="30" height="30" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="main-container">
+        <div class="list-bar">
+          <div class="left-container">
+            <div class="button-arrow">
+              <img src="/picture/arrow-left.png" width="32" height="32" />
+            </div>
+          </div>
+          <div class="middle-container">
+            <div class="listItem-container"></div>
+          </div>
+          <div class="right-container">
+            <div class="button-arrow">
+              <img src="/picture/arrow-right.png" width="32" height="32" />
+            </div>
+          </div>
+        </div>
+        <div class="attractions">
+          <div class="attractions-group"></div>
+        </div>
+      </div>
+    </main>
+    <%- include('footer') %> <%- include('script') %>
+    <script>
+      const intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          intersectionObserver.unobserve(
+            //若有observe到目標(footer)，先取消觀察，再fetch API
+            document.querySelector("footer")
+          );
+          if (nextPage !== null) {
+            // 有nexPage才呼叫API
+            getPage(nextPage);
+          }
+        }
+      });
+
+      function getPage(page) {
+        const keyword = document.querySelector(".search-input-text").value;
+
+        url = "/api/attractions?page=" + page + "&keyword=" + keyword;
+
+        // if (count[page]) {  //原先阻止重複呼叫API方法：若該page已叫過API，則僅計次數不再重複呼叫API
+        //   count[page] += 1;
+        //   return
+        // } else {
+        //   count[page] = 1;
+        // }
+
+        fetch(url, { method: "get" })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            if (responseJson["error"]) {
+              attractionsGroup.innerText = "搜尋不到資料";
+            } else {
+              const data = responseJson["data"];
+              data.forEach((item) => {
+                const attraction = document.createElement("div");
+                attraction.classList.add("attraction");
+                attraction.innerHTML = `
+            <a href="/attraction/${item["id"]}">
+            <img class="attraction-img" src="${item["images"][0]}" width="270" height="197">
+            <div class="details-middle">
+              <div class="name-bg">
+                <div class="name-info">
+                  <span class="name">${item["name"]}</span>
+                </div>
+              </div>
+            </div>
+            <div class="details-bottom">
+              <div class="details-info">
+                <span class="mrt">${item["mrt"]}</span>
+                <span class="category">${item["category"]}</span>
+              </div>
+            </div>          
+          `;
+                attractionsGroup.appendChild(attraction);
+              });
+              nextPage = responseJson["nextPage"];
+            }
+
+            intersectionObserver.observe(
+              //fetch好了, 恢復觀察
+              document.querySelector("footer")
+            );
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function getMrts() {
+        url = "/api/mrts";
+        fetch(url, { method: "get" })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            mrtList = responseJson["data"];
+
+            for (i = 0; i < mrtList.length; i++) {
+              const mrt = document.createElement("div");
+              mrt.classList.add("listItem");
+              mrt.innerHTML = `<div class="itemText" onclick="mrtAttractions('${mrtList[i]}')">${mrtList[i]}</div>`;
+              listItemContainer.appendChild(mrt);
+              scrollMax += mrt.offsetWidth;
+            }
+            scrollMax -= listItemContainer.clientWidth;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function search() {
+        count = {};
+        nextPage = 0;
+
+        while (attractionsGroup.firstChild) {
+          attractionsGroup.removeChild(attractionsGroup.lastChild);
+        }
+
+        getPage(0);
+      }
+
+      function mrtAttractions(mrt) {
+        document.querySelector(".search-input-text").value = mrt;
+        search();
+      }
+
+      let nextPage = 0;
+      let count = {};
+      let mrtList = [];
+
+      const attractionsGroup =
+        document.getElementsByClassName("attractions-group")[0];
+      const listItemContainer =
+        document.getElementsByClassName("listItem-container")[0];
+      const rightArrow = document.getElementsByClassName("right-container")[0];
+      const leftArrow = document.getElementsByClassName("left-container")[0];
+      let scrollAmount = 0;
+      let scrollMin = 0;
+      let scrollMax = 0;
+
+      getMrts(0);
+      search();
+
+      rightArrow.addEventListener("click", () => {
+        function scrollRight(distance) {
+          listItemContainer.scrollTo({
+            top: 0,
+            left: Math.min((scrollAmount += distance), scrollMax),
+            behavior: "smooth",
+          });
+          if (scrollAmount > scrollMax) {
+            scrollAmount = scrollMax;
+          }
+        }
+
+        if (document.body.clientWidth > 1200) {
+          scrollRight(1000);
+        } else if (document.body.clientWidth > 830) {
+          scrollRight(650);
+        } else {
+          scrollRight(200);
+        }
+      });
+
+      leftArrow.addEventListener("click", () => {
+        function scrollLeft(distance) {
+          listItemContainer.scrollTo({
+            top: 0,
+            left: Math.max((scrollAmount -= distance), scrollMin),
+            behavior: "smooth",
+          });
+          if (scrollAmount < scrollMin) {
+            scrollAmount = scrollMin;
+          }
+        }
+
+        if (document.body.clientWidth > 1200) {
+          scrollLeft(1000);
+        } else if (document.body.clientWidth > 830) {
+          scrollLeft(650);
+        } else {
+          scrollLeft(200);
+        }
+      });
+    </script>
+  </body>
+</html>

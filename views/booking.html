@@ -1,0 +1,390 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="../template.css">
+{% endblock %}
+
+{% block main %}
+<div class="content">
+  <div class="separator-nav">
+  </div>
+
+  <div class="headline">您好，<span class="userName"></span>，待預訂的行程如下：</div>
+
+  <div class="booking-content">
+    <div class="booking-container" id="booking-list">
+
+    </div>
+
+    <div class="separator-booking" id="separator-shorten">
+    </div>
+
+    <div class="booking-container">
+      <div class="contact-form">
+        <div class="contact-form-title">您的聯絡資訊</div>
+        <div class="contact-form-item">聯絡姓名：<input class="contact-name" required></div>
+        <div class="contact-form-item">聯絡信箱：<input class="contact-email" required></div>
+        <div class="contact-form-item" id="phone-text">手機號碼：<input class="contact-phone" required></div>
+        <div class="contact-form-item" id="contact-notice"><span
+            class="contact-notice">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</span></div>
+      </div>
+    </div>
+
+    <div class="separator-booking">
+    </div>
+
+    <div class="booking-container">
+      <div class="contact-form">
+        <div class="contact-form-title">信用卡付款資訊</div>
+        <style>
+          .tpfield {
+            height: 40px;
+            width: 300px;
+            border: 1px solid gray;
+            margin: 5px 0;
+            padding: 5px;
+          }
+        </style>
+        <div class="contact-form-item" id="card-text">卡片號碼：<div class="tpfield" id="card-number"></div>
+        </div>
+        <div class="contact-form-item" id="card-remind"></div>
+        <div class="contact-form-item" id="expiry-text">過期時間：<div class="tpfield" id="card-expiration-date"></div>
+        </div>
+        <div class="contact-form-item" id="expiry-remind"></div>
+        <div class="contact-form-item" id="cvv-text">驗證密碼：<div class="tpfield" id="card-ccv"></div>
+        </div>
+        <div class="contact-form-item" id="cvv-remind"></div>
+      </div>
+    </div>
+
+    <div class="separator-booking">
+    </div>
+
+    <div class="booking-container">
+      <div class="booking-confirm">
+        <div class="booking-total"></div>
+        <div class="booking-submit-container">
+          <button class="booking-submit-button" onclick="onSubmit(event)">確認訂購並付款</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-none"></div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"></script>
+<script> TPDirect.setupSDK(137040, 'app_A5irhTpBsKs7Os61mCRlcW4MmVYfJu2AZEMdBvOyjKhScgAPuwQATTmP3Sto', 'sandbox') </script>
+<script>
+  function getBooking() {
+
+    /*longinStatus為layout.html的getStatus()回傳呼叫API驗證會員登入的結果*/
+    longinStatus.then(userInfo => {
+
+      if (userInfo === null) {
+        return window.location.href = '/'
+      };
+
+      const getMethod = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+      }
+
+      fetch('/api/booking/', getMethod)
+        .then(response => response.json())
+        .then(responseJson => {
+          document.querySelector(".content").style.display = "block";
+          document.querySelector(".userName").textContent = userInfo["name"];
+          if (responseJson["data"] === null) {
+            document.querySelector(".booking-none").style.display = "flex";
+            document.querySelector(".booking-none").textContent = "目前沒有任何待預訂的行程";
+            document.querySelector(".booking-content").style.display = "none";
+            document.querySelector(".attraction-footer").style.height = "100%";
+          } else {
+            document.querySelector(".booking-content").style.display = "block";
+            document.querySelector(".booking-none").style.display = "none";
+
+            responseJson["data"].forEach(data => {
+
+              const order = document.createElement("div");
+              order.classList.add("booking-section");
+
+              let time = "早上9點到中午12點";
+              if (data["time"] == "afternoon") { time = "下午1點到下午4點"; }
+              let date = new Date(data["date"]);
+              date = date.getFullYear() + "-" + (date.getMonth() + 1).toString().padStart(2, "0") + "-" + date.getDate().toString().padStart(2, "0");
+              total += data["price"];
+
+              order.innerHTML = `
+              <div class="booking-section">
+                <div class="booking-picture">
+                  <img class="booking-img" src="${data["attraction"]["image"]}">
+                </div>
+                <div class="booking-info">
+                  <div class="delete" onclick="deleteBooking('${data["bookingId"]}');"><img src="/picture/delete.png"></div>
+                  <div class="booking-info-title">台北一日遊：<span class="booking-info-attraction">${data["attraction"]["name"]}</span></div>
+                  <div class="booking-info-item">日期：<span class="booking-info-date">${date}</span></div>
+                  <div class="booking-info-item">時間：<span class="booking-info-time">${time}</span></div>
+                  <div class="booking-info-item">費用：<span class="booking-info-price">新台幣 ${data["price"]} 元</span></div>
+                  <div class="booking-info-item" id="booking-address">地點：<span class="booking-info-address">${data["attraction"]["address"]}</span></div>
+                </div>
+              </div>
+              `
+              document.querySelector("#booking-list").appendChild(order)
+              let item = {}
+              item["price"] = data["price"]
+              item["trip"] = {}
+              item["trip"]["attraction"] = {}
+              item["trip"]["attraction"]["id"] = data["attraction"]["id"]
+              item["trip"]["attraction"]["name"] = data["attraction"]["name"]
+              item["trip"]["attraction"]["address"] = data["attraction"]["address"]
+              item["trip"]["attraction"]["image"] = data["attraction"]["image"]
+              item["trip"]["date"] = date
+              item["trip"]["time"] = data["time"]
+              orders.push(item)
+              bookingIdList.push(data["bookingId"])
+            })
+
+            document.querySelector(".contact-name").value = userInfo["name"];
+            document.querySelector(".contact-email").value = userInfo["email"];
+            document.querySelector(".booking-total").textContent = "總價：新台幣 " + total + " 元";
+          }
+        })
+
+    })
+
+  }
+
+  function deleteBooking(bookingId) {
+
+    /*longinStatus為layout.html的getStatus()回傳呼叫API驗證會員登入的結果*/
+    longinStatus.then(userInfo => {
+
+      if (userInfo === null) {
+        return window.location.href = '/'
+      };
+
+      const deleteMethod = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          bookingId: bookingId,
+        })
+      }
+
+      fetch('/api/booking', deleteMethod)
+        .then(response => response.json())
+        .then(responseJson => {
+          if (responseJson["ok"]) {
+            window.location.reload();
+          }
+        })
+        .catch(error => console.error("Error:", error))
+
+    })
+
+  }
+
+  const submitButton = document.querySelector(".booking-submit-button")
+  let fields = {
+    number: {
+      element: '#card-number',
+      placeholder: '**** **** **** ****'
+    },
+    expirationDate: {
+      element: document.getElementById('card-expiration-date'),
+      placeholder: 'MM / YY'
+    },
+    ccv: {
+      element: '#card-ccv',
+      placeholder: 'ccv'
+    }
+  }
+
+  TPDirect.card.setup({
+    fields: fields,
+    styles: {
+      'input': {
+        'color': 'gray'
+      },
+      'input.ccv': {
+        'font-size': '16px'
+      },
+      'input.expiration-date': {
+        'font-size': '16px'
+      },
+      'input.card-number': {
+        'font-size': '16px'
+      },
+      ':focus': {
+        'color': 'black'
+      },
+      // style valid state
+      '.valid': {
+        'color': 'green'
+      },
+      // style invalid state
+      '.invalid': {
+        'color': 'red'
+      },
+      // Note that these apply to the iframe, not the root window.
+      '@media screen and (max-width: 400px)': {
+        'input': {
+          'color': 'orange'
+        }
+      }
+    },
+    // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+    isMaskCreditCardNumber: true,
+    maskCreditCardNumberRange: {
+      beginIndex: 6,
+      endIndex: 11
+    }
+  })
+
+  TPDirect.card.onUpdate(function (update) {
+
+    if (update.cardType === 'unionpay') {
+      alert("不好意思，目前無法使用銀聯卡")
+      return
+    }
+    // number 欄位輸入提醒
+    if (update.status.number === 2) {
+      document.getElementById("card-text").style.color = "red";
+      document.querySelector("#card-remind").style.display = "flex";
+      document.querySelector("#card-remind").textContent = "卡號有誤";
+    } else if (update.status.number === 0) {
+      document.getElementById("card-text").style.color = "green";
+      document.querySelector("#card-remind").style.display = "none";
+    } else {
+      document.getElementById("card-text").style.color = "#666666";
+      document.querySelector("#card-remind").style.display = "none";
+    }
+    // expiry 欄位輸入提醒
+    if (update.status.expiry === 2) {
+      document.getElementById("expiry-text").style.color = "red";
+      document.querySelector("#expiry-remind").style.display = "flex";
+      document.querySelector("#expiry-remind").textContent = "日期有誤";
+    } else if (update.status.expiry === 0) {
+      document.getElementById("expiry-text").style.color = "green";
+      document.querySelector("#expiry-remind").style.display = "none";
+    } else {
+      document.getElementById("expiry-text").style.color = "#666666";
+      document.querySelector("#expiry-remind").style.display = "none";
+    }
+    // cvv 欄位輸入提醒
+    if (update.status.ccv === 2) {
+      document.getElementById("cvv-text").style.color = "red";
+      document.querySelector("#cvv-remind").style.display = "flex";
+      document.querySelector("#cvv-remind").textContent = "密碼有誤";
+    } else if (update.status.ccv === 0) {
+      document.getElementById("cvv-text").style.color = "green";
+      document.querySelector("#cvv-remind").style.display = "none";
+    } else {
+      document.getElementById("cvv-text").style.color = "#666666";
+      document.querySelector("#cvv-remind").style.display = "none";
+    }
+
+    // update.canGetPrime === true
+    // --> you can call TPDirect.card.getPrime()
+    if (update.canGetPrime) {
+      // Enable submit Button to get prime.
+      submitButton.removeAttribute('disabled')
+      submitButton.style.cursor = 'pointer';
+      if (document.querySelector(".contact-phone").value.length !== 10) {
+        document.querySelector("#phone-text").style.color = "red";
+        alert("請輸入10位數手機號碼")
+        return
+      }
+    } else {
+      // Disable submit Button to get prime.
+      submitButton.setAttribute('disabled', true)
+      submitButton.style.cursor = 'not-allowed';
+    }
+  })
+
+  function onSubmit(event) {
+    if (document.querySelector(".contact-phone").value.length !== 10) {
+      document.querySelector("#phone-text").style.color = "red";
+      alert("請輸入10位數手機號碼")
+      return
+    }
+    // 送出訂單後，按鈕禁止再次點擊，避免重複付款
+    submitButton.setAttribute('disabled', true);
+    submitButton.style.cursor = 'not-allowed';
+    // event.preventDefault()，取消「元素的預設行為」 例如阻止form表單submit資料
+
+    // 取得 TapPay Fields 的 status
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+
+    // 確認是否可以 getPrime
+    if (tappayStatus.canGetPrime === false) {
+      alert('請確認卡號資料是否輸入正確');
+      return
+    }
+
+    if (tappayStatus.cardType === 'unionpay') {
+      alert("不好意思，目前無法使用銀聯卡")
+      return
+    }
+
+    // Get prime
+    TPDirect.card.getPrime((result) => {
+      if (result.status !== 0) {
+        alert('get prime error ' + result.msg);
+        return
+      }
+      let contact = {}
+      contact["name"] = document.querySelector(".contact-name").value;
+      contact["email"] = document.querySelector(".contact-email").value;
+      contact["phone"] = document.querySelector(".contact-phone").value;
+
+      let order = {}
+      order["details"] = orders;
+      order["contact"] = contact;
+      order["amount"] = total;
+      order["bookingIdList"] = bookingIdList;
+
+      const postMethod = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          prime: result.card.prime,
+          order: order
+        })
+      }
+
+      fetch('/api/orders', postMethod)
+        .then(response => response.json())
+        .then(responseJson => {
+          if (responseJson["error"]) {
+            submitButton.removeAttribute('disabled')
+            submitButton.style.cursor = 'pointer';
+            return alert(responseJson["message"])
+          }
+
+          window.location.href = '/thankyou?number=' + responseJson["data"]["number"] + '&msg=' + responseJson["data"]["payment"]["message"]
+        })
+        .catch(error => console.error("Error:", error))
+    })
+  }
+
+  let total = 0;
+  let orders = [];
+  let bookingIdList = [];
+  getBooking();
+
+</script>
+{% endblock %}

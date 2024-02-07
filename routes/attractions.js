@@ -21,14 +21,10 @@ router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = await Attraction.findOne({ id }).exec();
-    const result = {};
     if (data === null) {
-      result["error"] = true;
-      result["message"] = "景點編號不正確";
-      return res.status(400).send(result);
+      return res.status(400).send({ error: true, message: "景點編號不正確" });
     }
-    result["data"] = datasetting(data);
-    return res.send(result);
+    return res.send({ data: datasetting(data) });
   } catch (e) {
     next(e);
   }
@@ -39,9 +35,10 @@ router.get("/", async (req, res, next) => {
     const { page, keyword } = req.query;
     const result = {};
     if ((page === "") | (Number(page) < 0) | (page === undefined)) {
-      result["error"] = true;
-      result["message"] = "page未輸入 或 page輸入非資料有效範圍內";
-      return res.status(400).send(result);
+      return res.status(400).send({
+        error: true,
+        message: "page未輸入 或 page輸入非資料有效範圍內",
+      });
     }
     const searchKey = new RegExp(keyword);
     const data = await Attraction.find({
@@ -61,9 +58,10 @@ router.get("/", async (req, res, next) => {
 
     let length = data.length;
     if (length === 0) {
-      result["error"] = true;
-      result["message"] = "無資料";
-      return res.status(400).send(result);
+      return res.status(400).send({
+        error: true,
+        message: "無資料",
+      });
     } else if (length === 13) {
       length = 12;
       result["nextPage"] = Number(page) + 1;

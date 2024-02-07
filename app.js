@@ -5,7 +5,12 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const attractionRoutes = require("./routes/attractions");
 const mrtRoutes = require("./routes/mrts");
+const userRoutes = require("./routes/user");
+const bookingRoutes = require("./routes/booking");
 const url = process.env.MONGODB;
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
+require("./config/passport")(passport);
 
 mongoose
   .connect(url)
@@ -20,9 +25,36 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.static(__dirname + "/public"));
 
 app.use("/api/attractions", attractionRoutes);
 app.use("/api/mrts", mrtRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/booking", bookingRoutes);
+
+app.get("/", async (req, res, next) => {
+  try {
+    return res.render("index");
+  } catch {
+    next();
+  }
+});
+
+app.get("/attraction/:id", async (req, res, next) => {
+  try {
+    return res.render("attraction");
+  } catch {
+    next();
+  }
+});
+
+app.get("/profile", async (req, res, next) => {
+  try {
+    return res.render("profile");
+  } catch {
+    next();
+  }
+});
 
 app.use((err, req, res, next) => {
   return res.status(500).send(err);

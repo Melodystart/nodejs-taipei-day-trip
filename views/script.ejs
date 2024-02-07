@@ -1,0 +1,257 @@
+<script>
+  function validateEmail(email) {
+    let re =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return re.test(email);
+  }
+
+  function signup() {
+    const username = document.querySelector("#username").value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const password = document.querySelector("#password").value.trim();
+    if (!username || !email || !password) {
+      return alert("欄位皆為必填");
+    }
+    if (!validateEmail(email)) {
+      return alert("email格式不正確");
+    }
+    const postMethod = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: username,
+        email: email,
+        password: password,
+      }),
+    };
+    message.style.display = "flex";
+    dialogBox.style.height = "364px";
+
+    fetch("/api/user", postMethod)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson["ok"]) {
+          message.innerText = "註冊成功請登入";
+        } else {
+          message.innerText = responseJson["message"];
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function signin() {
+    const email = document.querySelector("#email").value.trim();
+    const password = document.querySelector("#password").value.trim();
+    if (!email || !password) {
+      return alert("欄位皆為必填");
+    }
+    if (!validateEmail(email)) {
+      return alert("email格式不正確");
+    }
+    const putMethod = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    };
+
+    fetch("/api/user/auth", putMethod)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson["error"]) {
+          message.innerText = responseJson["message"];
+          message.style.display = "flex";
+          dialogBox.style.height = "307px";
+        } else {
+          localStorage.setItem("token", responseJson["token"]);
+          window.location.reload();
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  function toSignup() {
+    message.style.display = "none";
+    const inputUsername = document.createElement("div");
+    inputUsername.classList.add("input-username");
+    inputUsername.innerHTML = `<input type="text" class="input-text" id="username" name="username" placeholder="輸入姓名">`;
+    dialogMain.insertBefore(
+      inputUsername,
+      document.querySelector(".input-email")
+    );
+    dialogBox.style.height = "332px";
+    document.querySelector(".switch-signup").remove();
+
+    document.querySelector(".dialog-title").innerText = "註冊會員帳號";
+    document.querySelector(".dialog-button").innerText = "註冊新帳戶";
+    document.querySelector(".dialog-button").onclick = function () {
+      signup();
+    };
+
+    const switchSignin = document.createElement("div");
+    switchSignin.classList.add("switch-signin");
+    switchSignin.innerText = "已經有帳戶了？點此登入";
+    dialogMain.appendChild(switchSignin);
+    document.querySelector(".switch-signin").onclick = function () {
+      toSignin();
+    };
+  }
+
+  function toSignin() {
+    message.style.display = "none";
+    dialogBox.style.height = "275px";
+    document.querySelector(".input-username").remove();
+    document.querySelector(".switch-signin").remove();
+
+    document.querySelector(".dialog-title").innerText = "登入會員帳號";
+    document.querySelector(".dialog-button").innerText = "登入帳戶";
+    document.querySelector(".dialog-button").onclick = function () {
+      signin();
+    };
+
+    const switchSignup = document.createElement("div");
+    switchSignup.classList.add("switch-signup");
+    switchSignup.innerText = "還沒有帳戶？點此註冊";
+    dialogMain.appendChild(switchSignup);
+    document.querySelector(".switch-signup").onclick = function () {
+      toSignup();
+    };
+  }
+
+  function getStatus() {
+    const getMethod = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    const userInfo = fetch("/api/user/auth", getMethod)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        document.querySelector(".nav-container").style.display = "flex";
+        if (responseJson["data"] === null) {
+          document.querySelector("#member-center").style.display = "none";
+          document.querySelector("#login").style.display = "flex";
+          return responseJson["data"];
+        } else {
+          dialog.style.display = "none";
+          document.querySelector("#member-center").style.display = "flex";
+          document.querySelector("#login").style.display = "none";
+          document.querySelector("#logout").onclick = function () {
+            logout();
+          };
+          if (responseJson["data"]["filename"] !== null) {
+            document.querySelector(".nav-avatar").src =
+              // "/uploads/" +
+              // responseJson["data"]["id"] +
+              // "/" +
+              responseJson["data"]["filename"];
+          }
+          return responseJson["data"];
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+
+    return userInfo;
+  }
+
+  const longinStatus = getStatus();
+
+  const loginBtn = document.querySelector("#login");
+  const bookingBtn = document.querySelector("#booking");
+  const dialog = document.querySelector(".dialog-mask");
+  const dialogClose = document.querySelector(".dialog-close");
+  const dialogBox = document.querySelector(".dialog-box");
+  const dialogMain = document.querySelector(".dialog-main");
+  const message = document.querySelector(".message");
+  const memberCenter = document.querySelector("#member-center");
+  const bookingQuiry = document.querySelector("#booking-quiry");
+  const memberAccount = document.querySelector("#member-account");
+  const logoutBtn = document.querySelector("#logout");
+
+  loginBtn.addEventListener("click", () => {
+    dialog.style.display = "flex";
+    message.style.display = "none";
+  });
+
+  dialogClose.addEventListener("click", () => {
+    dialog.style.display = "none";
+  });
+
+  bookingBtn.addEventListener("click", () => {
+    /*longinStatus為layout.html的getStatus()回傳呼叫API驗證會員登入的結果*/
+    longinStatus.then((userInfo) => {
+      if (userInfo === null) {
+        dialog.style.display = "flex";
+        message.style.display = "none";
+      } else {
+        window.location.href = "/booking";
+      }
+    });
+  });
+
+  memberCenter.addEventListener("mouseenter", () => {
+    document.querySelector(".member-container").style.display = "block";
+  });
+
+  memberCenter.addEventListener("mouseleave", () => {
+    document.querySelector(".member-container").style.display = "none";
+  });
+
+  bookingQuiry.addEventListener("mouseenter", () => {
+    document.querySelector(".member-container").style.display = "block";
+    bookingQuiry.style.background = "#448899";
+    document.querySelector("#booking-quiry-text").style.color = "white";
+  });
+
+  bookingQuiry.addEventListener("mouseleave", () => {
+    document.querySelector(".member-container").style.display = "none";
+    document.querySelector("#booking-quiry-text").style.color = "#666666";
+    bookingQuiry.style.background = "white";
+  });
+
+  bookingQuiry.addEventListener("click", () => {
+    window.location.href = "/orderlist";
+  });
+
+  memberAccount.addEventListener("mouseenter", () => {
+    document.querySelector(".member-container").style.display = "block";
+    memberAccount.style.background = "#448899";
+    document.querySelector("#member-account-text").style.color = "white";
+  });
+
+  memberAccount.addEventListener("mouseleave", () => {
+    document.querySelector(".member-container").style.display = "none";
+    document.querySelector("#member-account-text").style.color = "#666666";
+    memberAccount.style.background = "white";
+  });
+
+  memberAccount.addEventListener("click", () => {
+    window.location.href = "/profile";
+  });
+
+  logoutBtn.addEventListener("mouseenter", () => {
+    document.querySelector(".member-container").style.display = "block";
+    logoutBtn.style.background = "#448899";
+    document.querySelector("#logout-text").style.color = "white";
+  });
+
+  logoutBtn.addEventListener("mouseleave", () => {
+    document.querySelector(".member-container").style.display = "none";
+    document.querySelector("#logout-text").style.color = "#666666";
+    logoutBtn.style.background = "white";
+  });
+</script>
