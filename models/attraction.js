@@ -12,6 +12,12 @@ const attractionSchema = new Schema({
   lat: Number,
   lng: Number,
   images: [String],
+  // bookings: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Booking",
+  //   },
+  // ],
 });
 
 const Attraction = mongoose.model("Attraction", attractionSchema);

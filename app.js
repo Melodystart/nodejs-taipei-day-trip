@@ -8,7 +8,6 @@ const mrtRoutes = require("./routes/mrts");
 const userRoutes = require("./routes/user");
 const bookingRoutes = require("./routes/booking");
 const url = process.env.MONGODB;
-const jwt = require("jsonwebtoken");
 const passport = require("passport");
 require("./config/passport")(passport);
 
@@ -51,6 +50,14 @@ app.get("/attraction/:id", async (req, res, next) => {
 app.get("/profile", async (req, res, next) => {
   try {
     return res.render("profile");
+  } catch {
+    next();
+  }
+});
+
+app.get("/booking", async (req, res, next) => {
+  try {
+    return res.render("booking");
   } catch {
     next();
   }
