@@ -266,7 +266,7 @@ router.get("/:id", async (req, res) => {
 
         bookingIdList.forEach((bookingId) => {
           bookings.forEach((booking) => {
-            if (booking["_id"].valueOf() === bookingId) {
+            if (booking["_id"].toString() === bookingId) {
               const item = {};
               item["price"] = booking["price"];
               item["trip"] = {};
