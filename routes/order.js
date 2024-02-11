@@ -270,7 +270,9 @@ router.get("/:id", async (req, res) => {
               const item = {};
               item["price"] = booking["price"];
               item["trip"] = {};
-              item["trip"]["date"] = booking["date"];
+              item["trip"]["date"] = moment(booking["date"]).format(
+                "YYYY-MM-DD"
+              );
               item["trip"]["time"] = booking["time"];
               item["trip"]["attraction"] = {};
               item["trip"]["attraction"]["id"] = booking["attractionId"];
