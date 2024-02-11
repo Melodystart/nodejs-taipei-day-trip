@@ -52,7 +52,10 @@ router.get("/", async (req, res) => {
   try {
     passport.authenticate("jwt", { session: false }, async (err, user) => {
       if (user) {
-        const bookings = await Booking.find({ memberId: user._id }).exec();
+        const bookings = await Booking.find({
+          memberId: user._id,
+          paymentStatus: "未付款",
+        }).exec();
         const attractions = await Attraction.find().exec();
         const result = {};
         result["data"] = [];

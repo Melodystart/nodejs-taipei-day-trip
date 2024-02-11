@@ -7,6 +7,7 @@ const attractionRoutes = require("./routes/attractions");
 const mrtRoutes = require("./routes/mrts");
 const userRoutes = require("./routes/user");
 const bookingRoutes = require("./routes/booking");
+const orderRoutes = require("./routes/order");
 const url = process.env.MONGODB;
 const passport = require("passport");
 require("./config/passport")(passport);
@@ -30,6 +31,7 @@ app.use("/api/attractions", attractionRoutes);
 app.use("/api/mrts", mrtRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/booking", bookingRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.get("/", async (req, res, next) => {
   try {
@@ -58,6 +60,30 @@ app.get("/profile", async (req, res, next) => {
 app.get("/booking", async (req, res, next) => {
   try {
     return res.render("booking");
+  } catch {
+    next();
+  }
+});
+
+app.get("/thankyou", async (req, res, next) => {
+  try {
+    return res.render("thankyou");
+  } catch {
+    next();
+  }
+});
+
+app.get("/orderlist", async (req, res, next) => {
+  try {
+    return res.render("orderlist");
+  } catch {
+    next();
+  }
+});
+
+app.get("/order", async (req, res, next) => {
+  try {
+    return res.render("order");
   } catch {
     next();
   }
