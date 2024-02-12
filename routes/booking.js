@@ -52,13 +52,25 @@ router.get("/", async (req, res) => {
   try {
     passport.authenticate("jwt", { session: false }, async (err, user) => {
       if (user) {
-        const bookings = await Booking.find({
-          memberId: user._id,
-          paymentStatus: "未付款",
-        }).exec();
-        const attractions = await Attraction.find().exec();
         const result = {};
         result["data"] = [];
+        
+        const bookings = await Booking.aggregate([
+          {
+            $match: {
+              memberId: user._id.toString(),
+              paymentStatus: "未付款",
+            },
+          },
+          {
+            $lookup: {
+              from: "attractions",
+              localField: "attractionId",
+              foreignField: "id",
+              as: "attraction",
+            },
+          },
+        ]);
 
         bookings.forEach((booking) => {
           const item = {};
@@ -66,17 +78,12 @@ router.get("/", async (req, res) => {
           item["time"] = booking["time"];
           item["price"] = booking["price"];
           item["bookingId"] = booking["_id"];
-
-          attractions.forEach((attraction) => {
-            if (booking["attractionId"] === attraction["id"]) {
-              item["attraction"] = {};
-              item["attraction"]["id"] = attraction["id"];
-              item["attraction"]["name"] = attraction["name"];
-              item["attraction"]["address"] = attraction["address"];
-              item["attraction"]["image"] = attraction["images"][0];
-              result["data"].push(item);
-            }
-          });
+          item["attraction"] = {};
+          item["attraction"]["id"] = booking["attraction"][0]["id"];
+          item["attraction"]["name"] = booking["attraction"][0]["name"];
+          item["attraction"]["address"] = booking["attraction"][0]["address"];
+          item["attraction"]["image"] = booking["attraction"][0]["images"][0];
+          result["data"].push(item);
         });
 
         if (result["data"].length === 0) {

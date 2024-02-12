@@ -200,7 +200,9 @@ router.get("/", async (req, res) => {
       if (user) {
         const orders = await Order.find({
           memberId: user._id,
-        }).exec();
+        })
+          .sort({ transactionDate: -1 })
+          .exec();
 
         const result = {};
         result["data"] = [];
@@ -257,12 +259,21 @@ router.get("/:id", async (req, res) => {
         result["data"]["msg"] = order["msg"];
         result["data"]["details"] = [];
         const bookingIdList = order["bookingIdList"];
-
-        const bookings = await Booking.find({
-          memberId: user._id,
-        }).exec();
-
-        const attractions = await Attraction.find().exec();
+        const bookings = await Booking.aggregate([
+          {
+            $match: {
+              memberId: user._id.toString(),
+            },
+          },
+          {
+            $lookup: {
+              from: "attractions",
+              localField: "attractionId",
+              foreignField: "id",
+              as: "attraction",
+            },
+          },
+        ]);
 
         bookingIdList.forEach((bookingId) => {
           bookings.forEach((booking) => {
@@ -276,14 +287,13 @@ router.get("/:id", async (req, res) => {
               item["trip"]["time"] = booking["time"];
               item["trip"]["attraction"] = {};
               item["trip"]["attraction"]["id"] = booking["attractionId"];
-              attractions.forEach((attraction) => {
-                if (attraction["id"] === booking["attractionId"]) {
-                  item["trip"]["attraction"]["name"] = attraction["name"];
-                  item["trip"]["attraction"]["address"] = attraction["address"];
-                  item["trip"]["attraction"]["image"] = attraction["images"][0];
-                  result["data"]["details"].push(item);
-                }
-              });
+              item["trip"]["attraction"]["name"] =
+                booking["attraction"][0]["name"];
+              item["trip"]["attraction"]["address"] =
+                booking["attraction"][0]["address"];
+              item["trip"]["attraction"]["image"] =
+                booking["attraction"][0]["images"][0];
+              result["data"]["details"].push(item);
             }
           });
         });

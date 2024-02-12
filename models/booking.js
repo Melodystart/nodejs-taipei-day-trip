@@ -9,10 +9,6 @@ const bookingSchema = new Schema({
   price: { type: Number, required: true },
   orderId: { type: String },
   paymentStatus: { type: String, default: "未付款" },
-  // attraction: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "Attraction",
-  // },
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
