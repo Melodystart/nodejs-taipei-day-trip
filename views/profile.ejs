@@ -125,13 +125,14 @@
                 .then((response) => response.json())
                 .then((responseJson) => {
                   if (responseJson["ok"]) {
-                    getStatus();
                     document.querySelector("#profile-message").textContent =
                       "會員資料已修改成功";
                     document.querySelector("#profile-message").style.display =
                       "flex";
                     document.querySelector("#profile-box").style.height =
                       "577px";
+                    document.querySelector(".nav-avatar").src =
+                      "data:image/*;base64," + responseJson["data"]["filename"];
                   } else {
                     alert(responseJson["message"]);
                   }
@@ -150,8 +151,7 @@
                 document.querySelector(".content").style.display = "block";
                 if (userInfo["filename"] !== null) {
                   document.querySelector("#avatar-upload").src =
-                    // "/uploads/" + userInfo["id"] + "/" + userInfo["filename"];
-                    userInfo["filename"];
+                    "data:image/*;base64," + userInfo["filename"];
                 }
                 document.querySelector("#profile-name").value =
                   userInfo["name"];

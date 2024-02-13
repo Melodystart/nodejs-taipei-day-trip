@@ -155,10 +155,7 @@
           };
           if (responseJson["data"]["filename"] !== null) {
             document.querySelector(".nav-avatar").src =
-              // "/uploads/" +
-              // responseJson["data"]["id"] +
-              // "/" +
-              responseJson["data"]["filename"];
+              "data:image/*;base64," + responseJson["data"]["filename"];
           }
           return responseJson["data"];
         }

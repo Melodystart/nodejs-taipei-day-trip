@@ -8,11 +8,6 @@ const saltRounds = 12;
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const upload = multer();
-const AWS = require("aws-sdk");
-const s3 = new AWS.S3({
-  accessKeyId: process.env.aws_access_key,
-  secretAccessKey: process.env.aws_secret_key,
-});
 
 router.post("/", async (req, res) => {
   try {
@@ -113,26 +108,11 @@ router.put("/profile", upload.any(), async (req, res) => {
             message: "更新失敗，名字與email為資料更新必填欄位",
           });
         }
-
         let filename = user.filename;
         if (req.files.length !== 0) {
-          s3.deleteObject(
-            { Bucket: process.env.s3_bucket_name, Key: user._id.toString() },
-            (err, data) => {
-              if (err) console.log(err, err.stack);
-            }
+          filename = Buffer.from(req.files[0].buffer, "binary").toString(
+            "base64"
           );
-          filename = "https://d3688zrms0ilwo.cloudfront.net/" + user._id;
-          const base64data = Buffer.from(req.files[0].buffer, "binary");
-          params = {
-            Bucket: process.env.s3_bucket_name,
-            Key: user._id.toString(), // 希望儲存在 S3 上的檔案名稱
-            Body: base64data,
-            ContentType: req.files[0].mimetype, // 副檔名
-          };
-          s3.upload(params, function (err, data) {
-            if (err) console.log(err, err.stack);
-          });
         }
 
         if (password !== undefined) {
@@ -152,7 +132,7 @@ router.put("/profile", upload.any(), async (req, res) => {
         }
 
         User.findByIdAndUpdate(user._id, updateData).exec();
-        return res.status(200).send({ ok: true });
+        return res.status(200).send({ ok: true, data: { filename: filename } });
       }
       return res.status(403).send({
         error: true,
